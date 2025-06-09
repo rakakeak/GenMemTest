@@ -62,7 +62,10 @@ export const useTextEditor = () => {
     setSelectedId(newId);
   };
 
-  const updateSelected = (key: keyof TextItem, value: number) => {
+  const updateSelected = <K extends keyof TextItem>(
+    key: K,
+    value: TextItem[K],
+  ) => {
     if (!selectedId) return;
     setTexts(prev =>
       prev.map(t => (t.id === selectedId ? {...t, [key]: value} : t)),
